@@ -9,8 +9,8 @@ spring:
 
 ai:
   openai:
-    api-key: AIzaSyAiwvBYTgZ-otfNlRRtFuaSxMqHaWcEJ8E
+    api-key: YOUR_API_KEY
     model: gemini-2.5-flash
   gemini:
-    api-key: AIzaSyAiwvBYTgZ-otfNlRRtFuaSxMqHaWcEJ8E
+    api-key: YOUR_API_KEY
     model: gemini-2.5-flash

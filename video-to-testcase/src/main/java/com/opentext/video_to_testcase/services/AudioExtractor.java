@@ -15,8 +15,8 @@ public class AudioExtractor {
     public File extract(File videoFile) throws Exception {
 
         String fileName = videoFile.getName();
-
-        File audioFile = File.createTempFile(fileName, ".mp3");
+        String cleanName = fileName.replaceAll("[^a-zA-Z0-String]", "_");
+        File audioFile = File.createTempFile("upload_" + "_" + cleanName, ".mp3");
 
         try (FFmpegFrameGrabber grabber = new FFmpegFrameGrabber(videoFile)) {
             grabber.start();
@@ -43,7 +43,12 @@ public class AudioExtractor {
                 recorder.stop();
             }
             grabber.stop();
+            return audioFile;
+        } catch (Exception e) {
+            if (audioFile.exists()) {
+                audioFile.delete();
+            }
+            throw e;
         }
-        return audioFile;
     }
 }
