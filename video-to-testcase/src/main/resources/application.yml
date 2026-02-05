@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: video-to-testcase
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+
+ai:
+  openai:
+    api-key: AIzaSyAiwvBYTgZ-otfNlRRtFuaSxMqHaWcEJ8E
+    model: gemini-2.5-flash
+  gemini:
+    api-key: AIzaSyAiwvBYTgZ-otfNlRRtFuaSxMqHaWcEJ8E
+    model: gemini-2.5-flash
