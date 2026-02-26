@@ -1,0 +1,22 @@
+"""
+Requirements for ExtJS to Angular Migration Tool with Crew AI Orchestration
+"""
+
+# Core AI Framework
+google-genai>=0.4.0
+
+# Optional: Crew AI Framework (for future Crew AI integration)
+# crew-ai>=0.1.0
+
+# Standard Library Dependencies (included in Python)
+# - os
+# - json
+# - re
+# - subprocess
+# - typing
+
+# Installation Instructions:
+# pip install -r requirements.txt
+#
+# Optional Crew AI installation:
+# pip install crew-ai
