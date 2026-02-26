@@ -45,8 +45,8 @@ def main():
     
     # Batch/Recursive directory example:
     migrator = ExtJsToAngularOrchestrator(
-        extjs_source="C:/dev/gitlab-repo/mfcui/WebContent/app/view",  # Directory - will process all .js files
-        angular_project_root="C:/dev/gitlab-repo/migrated-angular-app"
+        extjs_source="C:/dev/gitlab-repo/mfcui/WebContent/app/view/connect/users",  # Directory - will process all .js files
+        angular_project_root="C:/dev/gitlab-repo/migrated-angular-app-with folders"
     )
     migrator.run()
 
