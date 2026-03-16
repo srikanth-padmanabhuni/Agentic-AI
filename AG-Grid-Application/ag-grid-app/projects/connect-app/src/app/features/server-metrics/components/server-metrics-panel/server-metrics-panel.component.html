@@ -1,0 +1,11 @@
+<section class="server-metrics-panel" [attr.aria-label]="'SERVER_METRICS.TITLE' | translate">
+  <div class="list-actions">
+    <ui-button variant="secondary" size="sm" [labelKey]="'COMMON.RELOAD'" (clicked)="loadData()" />
+  </div>
+
+  <ui-data-grid
+    [rowData]="metrics()"
+    [columnDefs]="colDefs"
+    [gridHeight]="'calc(100vh - 170px)'"
+  />
+</section>

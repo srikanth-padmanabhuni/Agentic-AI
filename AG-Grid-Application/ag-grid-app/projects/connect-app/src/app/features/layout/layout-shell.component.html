@@ -1,0 +1,84 @@
+<div class="layout-shell">
+  <!-- Header -->
+  <header class="app-header" role="banner">
+    <ui-toolbar [elevated]="true">
+      <div toolbarStart class="header-start">
+        <a routerLink="/connections" class="logo-link" [attr.aria-label]="'HEADER.HOME' | translate">
+          <img src="assets/images/logo-white.png" alt="" class="header-logo" />
+          <span class="header-title">{{ 'HEADER.TITLE' | translate }}</span>
+        </a>
+      </div>
+
+      <div toolbarEnd class="header-end">
+        @if (version()) {
+          <span class="header-info" [attr.aria-label]="'HEADER.VERSION' | translate">
+            v{{ version() }}
+          </span>
+        }
+        @if (uptime()) {
+          <span class="header-info" [attr.aria-label]="'HEADER.UPTIME' | translate">
+            {{ 'HEADER.UPTIME' | translate }}: {{ uptime() }}
+          </span>
+        }
+
+        <ui-language-switcher />
+        <ui-theme-switcher />
+
+        <ui-menu [items]="settingsMenu" [ariaLabel]="'ARIA.SETTINGS_MENU' | translate">
+          <ui-button
+            variant="icon"
+            [ariaLabel]="'ARIA.SETTINGS_MENU' | translate"
+            labelKey="HEADER.SETTINGS"
+          />
+        </ui-menu>
+
+        @if (currentUser()) {
+          <span class="header-user">{{ currentUser()?.name }}</span>
+        }
+
+        <ui-button
+          variant="text"
+          [labelKey]="'HEADER.LOGOUT'"
+          [ariaLabel]="'ARIA.LOGOUT_BUTTON' | translate"
+          (clicked)="logout()"
+        />
+      </div>
+    </ui-toolbar>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="tab-nav" role="navigation" [attr.aria-label]="'ARIA.TAB_NAVIGATION' | translate">
+    <div class="tab-nav-scroll">
+      @for (tab of tabs(); track tab.route) {
+        <a
+          class="tab-link"
+          [routerLink]="tab.route"
+          routerLinkActive="tab-active"
+          [attr.aria-label]="tab.labelKey | translate"
+        >
+          {{ tab.labelKey | translate }}
+        </a>
+      }
+    </div>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  @if (breadcrumbs().length > 0) {
+    <div class="breadcrumb-bar">
+      <ui-breadcrumb [items]="breadcrumbs()" />
+    </div>
+  }
+
+  <!-- Loading Indicator -->
+  @if (isLoading()) {
+    <ui-loading-spinner size="sm" [overlay]="false" />
+  }
+
+  <!-- Main Content -->
+  <main class="main-content" role="main">
+    <router-outlet />
+  </main>
+
+  <!-- Snackbar Container -->
+  <ui-snackbar-container />
+</div>

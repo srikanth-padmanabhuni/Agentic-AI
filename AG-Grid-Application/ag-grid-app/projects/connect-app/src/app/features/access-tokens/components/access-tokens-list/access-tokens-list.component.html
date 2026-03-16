@@ -1,0 +1,11 @@
+<section class="access-tokens-list" [attr.aria-label]="'ACCESS_TOKENS.TITLE' | translate">
+  <div class="list-actions">
+    <ui-button variant="secondary" size="sm" [labelKey]="'COMMON.RELOAD'" (clicked)="loadData()" />
+  </div>
+
+  <ui-data-grid
+    [rowData]="tokens()"
+    [columnDefs]="colDefs"
+    [gridHeight]="'calc(100vh - 170px)'"
+  />
+</section>

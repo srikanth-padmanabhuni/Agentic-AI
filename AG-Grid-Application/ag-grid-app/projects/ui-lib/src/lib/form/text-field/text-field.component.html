@@ -1,0 +1,33 @@
+<div class="ui-text-field" [class.ui-text-field--error]="touched() && firstErrorKey" [class.ui-text-field--disabled]="isDisabled()">
+  @if (label()) {
+    <label class="ui-text-field__label" [attr.for]="'field-' + label()">
+      {{ label() | translate }}
+      @if (required()) {
+        <span class="ui-text-field__required" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+  <input
+    class="ui-text-field__input"
+    [id]="'field-' + label()"
+    [type]="type()"
+    [value]="value()"
+    [placeholder]="placeholder() ? (placeholder() | translate) : ''"
+    [attr.aria-label]="ariaLabel() ? (ariaLabel() | translate) : null"
+    [attr.aria-invalid]="touched() && firstErrorKey ? 'true' : null"
+    [attr.aria-describedby]="touched() && firstErrorKey ? 'error-' + label() : null"
+    [attr.aria-required]="required() || null"
+    [disabled]="isDisabled()"
+    [readOnly]="readonly()"
+    [autocomplete]="autocomplete()"
+    (input)="onInput($event)"
+    (blur)="onBlur()" />
+  @if (hint() && !firstErrorKey) {
+    <span class="ui-text-field__hint">{{ hint() | translate }}</span>
+  }
+  @if (touched() && firstErrorKey) {
+    <span class="ui-text-field__error" [id]="'error-' + label()" role="alert">
+      {{ firstErrorTranslationKey | translate }}
+    </span>
+  }
+</div>

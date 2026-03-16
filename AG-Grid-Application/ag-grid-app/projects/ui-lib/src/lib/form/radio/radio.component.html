@@ -1,0 +1,30 @@
+<fieldset
+  class="ui-radio"
+  [class.ui-radio--horizontal]="orientation() === 'horizontal'"
+  [class.ui-radio--disabled]="isDisabled()"
+  [attr.aria-label]="ariaLabel() ? (ariaLabel() | translate) : null">
+  @if (label()) {
+    <legend class="ui-radio__legend">{{ label() | translate }}</legend>
+  }
+  <div class="ui-radio__options" [class.ui-radio__options--horizontal]="orientation() === 'horizontal'">
+    @for (opt of options(); track opt.value) {
+      <label
+        class="ui-radio__option"
+        [class.ui-radio__option--disabled]="isDisabled() || opt.disabled"
+        [class.ui-radio__option--selected]="value() === opt.value">
+        <input
+          type="radio"
+          class="ui-radio__input"
+          [name]="name()"
+          [value]="opt.value"
+          [checked]="value() === opt.value"
+          [disabled]="isDisabled() || opt.disabled"
+          (change)="select(opt.value)" />
+        <span class="ui-radio__circle" aria-hidden="true">
+          <span class="ui-radio__dot"></span>
+        </span>
+        <span class="ui-radio__label">{{ opt.labelKey | translate }}</span>
+      </label>
+    }
+  </div>
+</fieldset>

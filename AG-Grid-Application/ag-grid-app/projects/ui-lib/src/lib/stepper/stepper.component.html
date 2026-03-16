@@ -1,0 +1,40 @@
+<div class="ui-stepper" [class.ui-stepper--vertical]="orientation() === 'vertical'" role="tablist" [attr.aria-label]="'ARIA.STEPPER' | translate">
+  <div class="ui-stepper__header" [class.ui-stepper__header--vertical]="orientation() === 'vertical'">
+    @for (step of steps(); track step.labelKey; let i = $index; let last = $last) {
+      <button
+        class="ui-stepper__step"
+        [class.ui-stepper__step--active]="i === activeIndex()"
+        [class.ui-stepper__step--completed]="i < activeIndex()"
+        [class.ui-stepper__step--disabled]="linear() && i > activeIndex() + 1"
+        role="tab"
+        type="button"
+        [attr.aria-selected]="i === activeIndex()"
+        [disabled]="linear() && i > activeIndex() + 1"
+        (click)="goTo(i)">
+        <span class="ui-stepper__number">
+          @if (i < activeIndex()) {
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          } @else {
+            {{ i + 1 }}
+          }
+        </span>
+        <span class="ui-stepper__label">
+          {{ step.labelKey | translate }}
+          @if (step.optional) {
+            <span class="ui-stepper__optional">(Optional)</span>
+          }
+        </span>
+      </button>
+      @if (!last) {
+        <div class="ui-stepper__connector"
+          [class.ui-stepper__connector--completed]="i < activeIndex()"
+          [class.ui-stepper__connector--vertical]="orientation() === 'vertical'"></div>
+      }
+    }
+  </div>
+  <div class="ui-stepper__content" role="tabpanel">
+    <ng-content></ng-content>
+  </div>
+</div>

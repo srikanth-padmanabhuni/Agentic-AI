@@ -1,0 +1,50 @@
+// ============================================================
+// Light Theme Preset — Default theme (azure/blue palette)
+// ============================================================
+
+.theme-light {
+  --ui-color-primary: #1976d2;
+  --ui-color-primary-hover: #1565c0;
+  --ui-color-primary-active: #0d47a1;
+  --ui-color-primary-light: #bbdefb;
+  --ui-color-primary-contrast: #ffffff;
+
+  --ui-color-secondary: #424242;
+  --ui-color-secondary-hover: #616161;
+  --ui-color-secondary-contrast: #ffffff;
+
+  --ui-color-danger: #d32f2f;
+  --ui-color-danger-hover: #c62828;
+  --ui-color-danger-light: #ffcdd2;
+  --ui-color-danger-contrast: #ffffff;
+
+  --ui-color-success: #2e7d32;
+  --ui-color-success-light: #c8e6c9;
+  --ui-color-warning: #f57c00;
+  --ui-color-warning-light: #ffe0b2;
+  --ui-color-info: #0288d1;
+  --ui-color-info-light: #b3e5fc;
+
+  --ui-color-surface: #ffffff;
+  --ui-color-surface-variant: #f5f5f5;
+  --ui-color-surface-hover: #eeeeee;
+  --ui-color-background: #fafafa;
+
+  --ui-color-on-surface: #212121;
+  --ui-color-on-surface-secondary: #757575;
+  --ui-color-on-surface-disabled: #9e9e9e;
+
+  --ui-color-border: #e0e0e0;
+  --ui-color-border-focus: var(--ui-color-primary);
+  --ui-color-divider: #eeeeee;
+
+  --ui-color-overlay: rgba(0, 0, 0, 0.5);
+
+  --ui-color-text: #212121;
+  --ui-color-text-secondary: #616161;
+  --ui-color-bg: #fafafa;
+  --ui-color-focus: rgba(25, 118, 210, 0.5);
+  --ui-color-on-surface-variant: #546e7a;
+
+  color-scheme: light;
+}

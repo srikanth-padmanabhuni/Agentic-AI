@@ -1,0 +1,115 @@
+<section class="import-export-panel" [attr.aria-label]="'IMPORT_EXPORT.TITLE' | translate">
+  <div class="panels-row">
+    <!-- Export Section -->
+    <ui-card [titleKey]="'IMPORT_EXPORT.EXPORT'">
+      <div class="export-section">
+        @if (connections().length > 0) {
+          <h4>{{ 'CONNECTIONS.TITLE' | translate }}</h4>
+          <div class="checkbox-list">
+            @for (conn of connections(); track conn.connectId) {
+              <label class="ie-checkbox">
+                <input type="checkbox"
+                  [checked]="selectedConnections().has(conn.connectId!)"
+                  (change)="toggleConnection(conn.connectId!, $any($event.target).checked)" />
+                {{ conn.name }}
+              </label>
+            }
+          </div>
+        }
+
+        @if (servers().length > 0) {
+          <h4>{{ 'SERVERS.TITLE' | translate }}</h4>
+          <div class="checkbox-list">
+            @for (server of servers(); track server.serverGuid) {
+              <label class="ie-checkbox">
+                <input type="checkbox"
+                  [checked]="selectedServers().has(server.serverGuid!)"
+                  (change)="toggleServer(server.serverGuid!, $any($event.target).checked)" />
+                {{ (server.host ?? '') + ':' + (server.port ?? '') }}
+              </label>
+            }
+          </div>
+        }
+
+        @if (dataSources().length > 0) {
+          <h4>{{ 'DATASOURCES.TITLE' | translate }}</h4>
+          <div class="checkbox-list">
+            @for (ds of dataSources(); track ds.connectId) {
+              <label class="ie-checkbox">
+                <input type="checkbox"
+                  [checked]="selectedDataSources().has(ds.connectId!)"
+                  (change)="toggleDataSource(ds.connectId!, $any($event.target).checked)" />
+                {{ ds.name }}
+              </label>
+            }
+          </div>
+        }
+
+        @if (users().length > 0) {
+          <h4>{{ 'USERS.TITLE' | translate }}</h4>
+          <div class="checkbox-list">
+            @for (user of users(); track user.connectId) {
+              <label class="ie-checkbox">
+                <input type="checkbox"
+                  [checked]="selectedUsers().has(user.connectId!)"
+                  (change)="toggleUser(user.connectId!, $any($event.target).checked)" />
+                {{ user.name }}
+              </label>
+            }
+          </div>
+        }
+
+        @if (isExporting()) {
+          <ui-progress-bar [indeterminate]="true" />
+        }
+
+        <div class="export-actions">
+          <ui-button
+            variant="primary"
+            [labelKey]="'IMPORT_EXPORT.EXPORT'"
+            [disabled]="!hasSelections || isExporting()"
+            (clicked)="onExport()"
+          />
+        </div>
+      </div>
+    </ui-card>
+
+    <!-- Import Section -->
+    <ui-card [titleKey]="'IMPORT_EXPORT.IMPORT'">
+      <div class="import-section">
+        <label class="file-label" for="importFile">{{ 'IMPORT_EXPORT.SELECT_FILE' | translate }}</label>
+        <input
+          id="importFile"
+          type="file"
+          accept=".xml"
+          class="file-input"
+          (change)="onFileSelected($event)"
+          [attr.aria-label]="'IMPORT_EXPORT.SELECT_FILE' | translate"
+        />
+
+        @if (isImporting()) {
+          <ui-progress-bar [indeterminate]="true" />
+        }
+
+        <ui-button
+          variant="primary"
+          [labelKey]="'IMPORT_EXPORT.IMPORT'"
+          [disabled]="!selectedFile() || isImporting()"
+          (clicked)="onImport()"
+        />
+
+        @if (importMessages().length > 0) {
+          <div class="import-messages" role="log" [attr.aria-label]="'IMPORT_EXPORT.MESSAGES' | translate">
+            <h4>{{ 'IMPORT_EXPORT.MESSAGES' | translate }}</h4>
+            @for (msg of importMessages(); track $index) {
+              <div class="import-message" [class]="getSeverityClass(msg.severity)">
+                <strong>{{ msg.severity }}</strong>: {{ msg.message }}
+                <span class="msg-entity">{{ msg.entityType }} - {{ msg.entityName }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </ui-card>
+  </div>
+</section>

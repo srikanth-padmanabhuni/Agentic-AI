@@ -1,0 +1,41 @@
+<section class="user-edit" [attr.aria-label]="'USERS.EDIT' | translate">
+  <ui-toolbar>
+    <ui-button variant="text" [labelKey]="'COMMON.CANCEL'" (clicked)="onCancel()" />
+    <ui-button variant="primary" [labelKey]="'COMMON.SAVE'" (clicked)="onSave()" />
+  </ui-toolbar>
+
+  @if (user(); as u) {
+    <ui-card [titleKey]="'USERS.EDIT'">
+      <form class="form-grid" (ngSubmit)="onSave()">
+        <ui-text-field
+          [(ngModel)]="name"
+          [label]="'USERS.NAME' | translate"
+          name="name"
+          [required]="true"
+          [ariaLabel]="'ARIA.USER_NAME' | translate"
+        />
+        <ui-text-field
+          [ngModel]="u.userId ?? ''"
+          [label]="'USERS.USER_ID' | translate"
+          name="userId"
+          [readonly]="true"
+          [ariaLabel]="'ARIA.USER_ID' | translate"
+        />
+        <ui-select
+          [(ngModel)]="role"
+          [options]="roleOptions"
+          [label]="'USERS.ROLE' | translate"
+          name="role"
+        />
+        <ui-select
+          [(ngModel)]="status"
+          [options]="statusOptions"
+          [label]="'USERS.STATUS' | translate"
+          name="status"
+        />
+      </form>
+    </ui-card>
+  } @else {
+    <p>{{ 'COMMON.LOADING' | translate }}</p>
+  }
+</section>

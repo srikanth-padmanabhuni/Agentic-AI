@@ -1,0 +1,91 @@
+:host {
+  display: block;
+}
+
+.import-export-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.panels-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--ui-spacing-lg);
+}
+
+.export-section,
+.import-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-spacing-sm);
+}
+
+.export-section h4,
+.import-section h4 {
+  margin: var(--ui-spacing-sm) 0 0;
+  font-size: var(--ui-font-size-sm);
+  color: var(--ui-color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-spacing-xs);
+  padding-left: var(--ui-spacing-sm);
+}
+
+.export-actions {
+  padding-top: var(--ui-spacing-md);
+}
+
+.file-label {
+  font-weight: 500;
+  font-size: var(--ui-font-size-sm);
+}
+
+.file-input {
+  padding: var(--ui-spacing-xs);
+}
+
+.import-messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-spacing-xs);
+  margin-top: var(--ui-spacing-sm);
+}
+
+.import-message {
+  padding: var(--ui-spacing-xs) var(--ui-spacing-sm);
+  border-radius: var(--ui-border-radius-sm);
+  font-size: var(--ui-font-size-sm);
+}
+
+.msg-error {
+  background: var(--ui-color-error-bg, #fde8e8);
+  color: var(--ui-color-error);
+}
+
+.msg-warning {
+  background: var(--ui-color-warning-bg, #fef3cd);
+  color: var(--ui-color-warning);
+}
+
+.msg-info {
+  background: var(--ui-color-info-bg, #e3f2fd);
+  color: var(--ui-color-info);
+}
+
+.msg-entity {
+  display: block;
+  font-size: var(--ui-font-size-xs);
+  color: var(--ui-color-text-secondary);
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .panels-row {
+    grid-template-columns: 1fr;
+  }
+}

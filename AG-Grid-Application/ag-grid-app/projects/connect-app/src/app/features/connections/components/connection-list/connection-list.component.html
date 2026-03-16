@@ -1,0 +1,26 @@
+<section class="connection-list" [attr.aria-label]="'CONNECTIONS.TITLE' | translate">
+  <div class="list-actions">
+    <ui-search-bar
+      [placeholderKey]="'COMMON.SEARCH'"
+      [ariaLabel]="'ARIA.SEARCH'"
+      (searchChanged)="onSearch($event)"
+    />
+    <ui-button
+      variant="primary"
+      size="sm"
+      [labelKey]="'CONNECTIONS.CREATE'"
+      [ariaLabel]="'ARIA.CREATE_CONNECTION'"
+      (clicked)="onCreate()"
+    />
+  </div>
+
+  <ui-data-grid
+    [rowData]="connections()"
+    [columnDefs]="columnDefs"
+    [pagination]="true"
+    [paginationPageSize]="25"
+    [quickFilterText]="searchText()"
+    [gridHeight]="'calc(100vh - 170px)'"
+    (rowClicked)="onRowClicked($event)"
+  />
+</section>

@@ -1,0 +1,108 @@
+.ui-stepper {
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: var(--ui-spacing-lg);
+    overflow-x: auto;
+
+    &--vertical {
+      flex-direction: column;
+      align-items: flex-start;
+      overflow-x: visible;
+    }
+  }
+
+  &__step {
+    display: flex;
+    align-items: center;
+    gap: var(--ui-spacing-sm);
+    padding: var(--ui-spacing-sm) var(--ui-spacing-md);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--ui-font-family);
+    white-space: nowrap;
+
+    &:focus-visible {
+      outline: 2px solid var(--ui-color-border-focus);
+      outline-offset: 2px;
+    }
+
+    &--disabled { cursor: not-allowed; opacity: 0.4; }
+    &--active .ui-stepper__number {
+      background-color: var(--ui-color-primary);
+      color: var(--ui-color-primary-contrast);
+    }
+    &--active .ui-stepper__label { font-weight: var(--ui-font-weight-semibold); color: var(--ui-color-primary); }
+    &--completed .ui-stepper__number {
+      background-color: var(--ui-color-success);
+      color: #fff;
+    }
+  }
+
+  &__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--ui-color-surface-variant);
+    color: var(--ui-color-on-surface-variant);
+    font-size: var(--ui-font-size-sm);
+    font-weight: var(--ui-font-weight-semibold);
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: var(--ui-font-size-sm);
+    color: var(--ui-color-on-surface);
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  &__optional {
+    font-size: var(--ui-font-size-xs);
+    color: var(--ui-color-on-surface-secondary);
+    font-weight: var(--ui-font-weight-regular);
+  }
+
+  &__connector {
+    flex: 1;
+    height: 2px;
+    min-width: 24px;
+    background-color: var(--ui-color-border);
+
+    &--completed { background-color: var(--ui-color-success); }
+
+    &--vertical {
+      width: 2px;
+      height: auto;
+      min-height: 24px;
+      min-width: 0;
+      margin-left: calc(var(--ui-spacing-md) + 13px);
+    }
+  }
+
+  &__content {
+    padding: var(--ui-spacing-md) 0;
+  }
+
+  // Vertical layout modifier
+  &--vertical {
+    display: flex;
+    flex-direction: row;
+    gap: var(--ui-spacing-lg);
+
+    .ui-stepper__header {
+      margin-bottom: 0;
+    }
+
+    .ui-stepper__content {
+      flex: 1;
+      padding: var(--ui-spacing-sm) 0;
+    }
+  }
+}

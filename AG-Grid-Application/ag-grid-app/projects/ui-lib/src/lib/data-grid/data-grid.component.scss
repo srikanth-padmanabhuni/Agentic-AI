@@ -1,0 +1,8 @@
+@use '../theme/ag-grid-overrides';
+
+.ui-data-grid {
+  width: 100%;
+  border-radius: var(--ui-border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--ui-shadow-sm);
+}

@@ -1,0 +1,11 @@
+<section class="authenticators-list" [attr.aria-label]="'AUTHENTICATORS.TITLE' | translate">
+  <div class="list-actions">
+    <ui-button variant="secondary" size="sm" [labelKey]="'COMMON.RELOAD'" (clicked)="loadData()" />
+  </div>
+
+  <ui-data-grid
+    [rowData]="authenticators()"
+    [columnDefs]="colDefs"
+    [gridHeight]="'calc(100vh - 170px)'"
+  />
+</section>

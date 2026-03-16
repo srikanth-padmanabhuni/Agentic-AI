@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": [],
+    "paths": {
+      "ui-lib": ["../projects/ui-lib/src/public-api.ts"]
+    }
+  },
+  "include": [
+    "../projects/ui-lib/src/**/*.ts",
+    "../projects/ui-lib/src/**/*.stories.ts",
+    "./*.ts"
+  ],
+  "exclude": ["../node_modules", "../projects/ui-lib/src/**/*.spec.ts"]
+}

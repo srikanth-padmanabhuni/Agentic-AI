@@ -1,0 +1,13 @@
+<div
+  class="ui-progress-bar"
+  [class.ui-progress-bar--indeterminate]="indeterminate()"
+  role="progressbar"
+  [attr.aria-valuenow]="indeterminate() ? null : value()"
+  [attr.aria-valuemin]="indeterminate() ? null : 0"
+  [attr.aria-valuemax]="indeterminate() ? null : 100"
+  [attr.aria-label]="ariaLabel() | translate">
+  <div
+    class="ui-progress-bar__fill"
+    [style.width.%]="indeterminate() ? null : value()">
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<nav class="ui-tab-nav" [attr.aria-label]="ariaLabel() | translate" role="tablist">
+  @for (tab of tabs(); track tab.route) {
+    <a
+      class="ui-tab-nav__tab"
+      [routerLink]="tab.route"
+      routerLinkActive="ui-tab-nav__tab--active"
+      role="tab"
+      [attr.aria-selected]="false">
+      @if (tab.icon) {
+        <span class="ui-tab-nav__icon" aria-hidden="true">{{ tab.icon }}</span>
+      }
+      <span class="ui-tab-nav__label">{{ tab.labelKey | translate }}</span>
+    </a>
+  }
+</nav>

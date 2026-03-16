@@ -1,0 +1,26 @@
+<div class="ui-menu">
+  <div class="ui-menu__trigger" (click)="toggle()">
+    <ng-content select="[menuTrigger]"></ng-content>
+  </div>
+  @if (isOpen()) {
+    <ul class="ui-menu__list" role="menu" [attr.aria-label]="ariaLabel() | translate">
+      @for (item of items(); track item.labelKey) {
+        <li
+          class="ui-menu__item"
+          [class.ui-menu__item--disabled]="item.disabled"
+          [class.ui-menu__item--danger]="item.danger"
+          role="menuitem"
+          [attr.aria-disabled]="item.disabled || null"
+          tabindex="0"
+          (click)="onItemClick(item)"
+          (keydown.enter)="onItemClick(item)"
+          (keydown.space)="onItemClick(item)">
+          @if (item.icon) {
+            <span class="ui-menu__icon" aria-hidden="true">{{ item.icon }}</span>
+          }
+          <span class="ui-menu__label">{{ item.labelKey | translate }}</span>
+        </li>
+      }
+    </ul>
+  }
+</div>

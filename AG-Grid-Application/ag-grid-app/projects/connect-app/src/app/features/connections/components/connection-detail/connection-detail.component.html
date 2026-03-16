@@ -1,0 +1,53 @@
+@if (loading()) {
+  <p>{{ 'COMMON.LOADING' | translate }}</p>
+} @else if (connection(); as conn) {
+  <section class="connection-detail" [attr.aria-label]="'CONNECTIONS.DETAIL' | translate">
+    <ui-toolbar>
+      <div toolbarStart>
+        <ui-button variant="text" [labelKey]="'COMMON.BACK'" (clicked)="onBack()" [ariaLabel]="'ARIA.BACK'" />
+        <h2>{{ conn.name }}</h2>
+        <ui-badge [color]="conn.unifiedStatus === 'Running' ? 'success' : 'default'" [labelKey]="conn.unifiedStatus ?? ''" />
+      </div>
+      <div toolbarEnd class="toolbar-actions">
+        <ui-button variant="primary" [labelKey]="'COMMON.EDIT'" (clicked)="onEdit()" />
+        <ui-button variant="secondary" [labelKey]="'CONNECTIONS.RUN'" (clicked)="onRun()" />
+        <ui-button variant="danger" [labelKey]="'CONNECTIONS.STOP'" (clicked)="onStop()" />
+      </div>
+    </ui-toolbar>
+
+    <div class="detail-grid">
+      <ui-card [titleKey]="'CONNECTIONS.SUMMARY'">
+        <dl class="detail-list">
+          <div class="detail-row">
+            <dt>{{ 'CONNECTIONS.SOURCE' | translate }}</dt>
+            <dd>{{ conn.source }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>{{ 'CONNECTIONS.TARGET' | translate }}</dt>
+            <dd>{{ conn.target }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>{{ 'CONNECTIONS.DIRECTION' | translate }}</dt>
+            <dd>{{ conn.direction }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>{{ 'CONNECTIONS.SERVER' | translate }}</dt>
+            <dd>{{ conn.server }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>{{ 'CONNECTIONS.LAST_SYNC_CHANGES' | translate }}</dt>
+            <dd>{{ conn.lastSyncChanges }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>{{ 'CONNECTIONS.LAST_SYNC_DURATION' | translate }}</dt>
+            <dd>{{ conn.lastSyncDuration }}</dd>
+          </div>
+        </dl>
+      </ui-card>
+
+      <ui-expansion-panel [titleKey]="'CONNECTIONS.DESCRIPTION'">
+        <p>{{ conn.description }}</p>
+      </ui-expansion-panel>
+    </div>
+  </section>
+}

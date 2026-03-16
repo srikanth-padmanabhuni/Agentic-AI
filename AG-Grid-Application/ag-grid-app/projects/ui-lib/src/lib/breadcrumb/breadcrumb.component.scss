@@ -1,0 +1,40 @@
+.ui-breadcrumb {
+  &__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--ui-spacing-xs);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--ui-spacing-xs);
+    font-family: var(--ui-font-family);
+    font-size: var(--ui-font-size-sm);
+  }
+
+  &__link {
+    color: var(--ui-color-primary);
+    text-decoration: none;
+    transition: color var(--ui-transition-fast);
+
+    &:hover { text-decoration: underline; }
+    &:focus-visible {
+      outline: 2px solid var(--ui-color-border-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  &__current {
+    color: var(--ui-color-on-surface);
+    font-weight: var(--ui-font-weight-medium);
+  }
+
+  &__separator {
+    color: var(--ui-color-on-surface-variant);
+  }
+}

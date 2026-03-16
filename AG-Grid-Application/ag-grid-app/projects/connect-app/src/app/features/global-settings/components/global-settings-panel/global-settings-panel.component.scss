@@ -1,0 +1,58 @@
+:host {
+  display: block;
+}
+
+.global-settings-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ui-spacing-sm);
+  padding: var(--ui-spacing-xs) 0;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-spacing-sm);
+}
+
+.property-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--ui-spacing-md);
+  align-items: center;
+  padding: var(--ui-spacing-xs) 0;
+  border-bottom: 1px solid var(--ui-color-border);
+}
+
+.prop-name label {
+  font-weight: 500;
+  font-size: var(--ui-font-size-sm);
+  color: var(--ui-color-text-secondary);
+}
+
+.settings-input {
+  width: 100%;
+  padding: var(--ui-spacing-xs) var(--ui-spacing-sm);
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-border-radius-sm);
+  background: var(--ui-color-surface);
+  color: var(--ui-color-text);
+  font-size: var(--ui-font-size-base);
+}
+
+.settings-input:focus {
+  outline: 2px solid var(--ui-color-primary);
+  outline-offset: 1px;
+}
+
+@media (max-width: 480px) {
+  .property-row {
+    grid-template-columns: 1fr;
+  }
+}

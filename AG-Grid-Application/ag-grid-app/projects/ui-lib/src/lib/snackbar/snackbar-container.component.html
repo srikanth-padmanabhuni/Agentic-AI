@@ -1,0 +1,14 @@
+<div class="ui-snackbar-container" aria-live="polite" aria-atomic="false">
+  @for (msg of snackbarService.messages(); track msg.id) {
+    <div class="ui-snackbar" [class]="'ui-snackbar--' + msg.type" role="status">
+      <span class="ui-snackbar__message">{{ msg.messageKey | translate:msg.params }}</span>
+      <button
+        class="ui-snackbar__dismiss"
+        type="button"
+        [attr.aria-label]="'ARIA.DISMISS' | translate"
+        (click)="snackbarService.dismiss(msg.id)">
+        &times;
+      </button>
+    </div>
+  }
+</div>

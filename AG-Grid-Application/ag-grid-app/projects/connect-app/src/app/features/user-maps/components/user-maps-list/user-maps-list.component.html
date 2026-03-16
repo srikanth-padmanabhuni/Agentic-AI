@@ -1,0 +1,46 @@
+<section class="user-maps-list" [attr.aria-label]="'USER_MAPS.TITLE' | translate">
+  <div class="list-actions">
+    <ui-button variant="secondary" size="sm" [labelKey]="'COMMON.CANCEL'" [disabled]="!isDirty()" (clicked)="onCancel()" />
+    <ui-button variant="primary" size="sm" [labelKey]="'COMMON.SAVE'" [disabled]="!isDirty()" (clicked)="onSave()" />
+    <ui-button variant="secondary" size="sm" [labelKey]="'COMMON.RELOAD'" (clicked)="loadData()" />
+  </div>
+
+  <ui-card [titleKey]="'USER_MAPS.TITLE'">
+    <div class="tree-area" role="tree" [attr.aria-label]="'USER_MAPS.TREE' | translate">
+      @for (node of userMaps(); track node.id) {
+        <div class="tree-node" role="treeitem">
+          @if (node.children && node.children.length > 0) {
+            <details class="tree-group">
+              <summary class="tree-group-header">
+                <ui-inline-edit
+                  [value]="node.text"
+                  [ariaLabel]="'User map group: ' + node.text"
+                  (saved)="onNodeTextSaved(node, $event)"
+                />
+              </summary>
+              <div class="tree-children" role="group">
+                @for (child of node.children; track child.id) {
+                  <div class="tree-leaf" role="treeitem">
+                    <ui-inline-edit
+                      [value]="child.text"
+                      [ariaLabel]="'User map value: ' + child.text"
+                      (saved)="onNodeTextSaved(child, $event)"
+                    />
+                  </div>
+                }
+              </div>
+            </details>
+          } @else {
+            <div class="tree-leaf">
+              <ui-inline-edit
+                [value]="node.text"
+                [ariaLabel]="'User map value: ' + node.text"
+                (saved)="onNodeTextSaved(node, $event)"
+              />
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </ui-card>
+</section>

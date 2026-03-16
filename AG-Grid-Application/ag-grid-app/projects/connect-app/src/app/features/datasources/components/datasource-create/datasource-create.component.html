@@ -1,0 +1,31 @@
+<section class="datasource-create" [attr.aria-label]="'DATASOURCES.CREATE' | translate">
+  <ui-toolbar>
+    <ui-button variant="text" [labelKey]="'COMMON.CANCEL'" (clicked)="onCancel()" />
+    <ui-button variant="primary" [labelKey]="'COMMON.SAVE'" (clicked)="onSave()" />
+  </ui-toolbar>
+
+  <ui-card [titleKey]="'DATASOURCES.CREATE'">
+    <form class="form-grid" (ngSubmit)="onSave()">
+      <ui-text-field
+        [(ngModel)]="name"
+        [label]="'DATASOURCES.NAME' | translate"
+        name="name"
+        [required]="true"
+        [ariaLabel]="'ARIA.DATASOURCE_NAME' | translate"
+      />
+      <ui-text-field
+        [(ngModel)]="product"
+        [label]="'DATASOURCES.PRODUCT' | translate"
+        name="product"
+        [required]="true"
+        [ariaLabel]="'ARIA.DATASOURCE_PRODUCT' | translate"
+      />
+      <ui-text-field
+        [(ngModel)]="contextType"
+        [label]="'DATASOURCES.CONTEXT_TYPE' | translate"
+        name="contextType"
+        [ariaLabel]="'ARIA.DATASOURCE_CONTEXT' | translate"
+      />
+    </form>
+  </ui-card>
+</section>

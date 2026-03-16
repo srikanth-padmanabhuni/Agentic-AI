@@ -1,0 +1,19 @@
+<section class="datasource-list" [attr.aria-label]="'DATASOURCES.TITLE' | translate">
+  <div class="list-actions">
+    <ui-search-bar
+      [placeholderKey]="'DATASOURCES.SEARCH'"
+      (searchChanged)="onSearch($event)"
+    />
+    @if (canCreate()) {
+      <ui-button variant="primary" size="sm" [labelKey]="'DATASOURCES.ADD'" (clicked)="onCreate()" />
+    }
+    <ui-button variant="secondary" size="sm" [labelKey]="'COMMON.RELOAD'" (clicked)="loadData()" />
+  </div>
+
+  <ui-data-grid
+    [rowData]="filteredDataSources()"
+    [columnDefs]="colDefs"
+    [gridHeight]="'calc(100vh - 170px)'"
+    (rowClicked)="onRowClicked($event)"
+  />
+</section>

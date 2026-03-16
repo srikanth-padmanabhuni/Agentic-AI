@@ -1,0 +1,76 @@
+<section class="server-list" [attr.aria-label]="'SERVERS.TITLE' | translate">
+  <div class="list-actions">
+    <ui-button variant="text" size="sm" [labelKey]="expandedAll() ? 'COMMON.COLLAPSE_ALL' : 'COMMON.EXPAND_ALL'" (clicked)="toggleExpandAll()" />
+    <ui-button variant="secondary" size="sm" [labelKey]="'SERVERS.SHUTDOWN_FOR_UPGRADE'" (clicked)="onStopForUpgrade()" />
+    <ui-button variant="secondary" size="sm" [labelKey]="'COMMON.RELOAD'" (clicked)="loadData()" />
+  </div>
+
+  <div class="server-content">
+    @for (server of servers(); track server.serverGuid) {
+      <ui-expansion-panel [titleKey]="'SERVERS.SERVER'" [expanded]="expandedAll()">
+        <ng-container panelHeader>
+          <div class="server-header">
+            <ui-badge [labelKey]="server.status ?? ''" [color]="getStatusVariant(server)" />
+            <span class="server-host">{{ server.host }}:{{ server.port }}</span>
+            <span class="server-summary">
+              {{ 'SERVERS.JOBS' | translate }}: {{ server.numOfRunningJobs }}/{{ server.maxNumJobs }}
+              | {{ 'SERVERS.UPTIME' | translate }}: {{ server.uptime }}
+            </span>
+          </div>
+        </ng-container>
+
+        <div class="server-details">
+          <div class="metrics-row">
+            <dl class="metrics-grid">
+              <div class="metric">
+                <dt>{{ 'SERVERS.CPU' | translate }}</dt>
+                <dd>{{ server.processCpuUsage }}%</dd>
+              </div>
+              <div class="metric">
+                <dt>{{ 'SERVERS.MEMORY' | translate }}</dt>
+                <dd>{{ server.usedMemory }}MB / {{ server.totalMemory }}MB</dd>
+              </div>
+              <div class="metric">
+                <dt>{{ 'SERVERS.DISK' | translate }}</dt>
+                <dd>{{ server.freeDiskSpace }}MB {{ 'COMMON.FREE' | translate }}</dd>
+              </div>
+              <div class="metric">
+                <dt>{{ 'SERVERS.VERSION' | translate }}</dt>
+                <dd>{{ server.contentVersion }}</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="server-actions">
+            <ui-button variant="secondary" [labelKey]="'COMMON.DELETE'" (clicked)="onDeleteServer(server)" />
+          </div>
+
+          @if (getJobsForServer(server.serverGuid!).length > 0) {
+            <h4>{{ 'SERVERS.ASSIGNED_JOBS' | translate }}</h4>
+            <ui-data-grid
+              [rowData]="getJobsForServer(server.serverGuid!)"
+              [columnDefs]="jobColDefs"
+              [domLayout]="'autoHeight'"
+            />
+          }
+        </div>
+      </ui-expansion-panel>
+    }
+
+    @if (unassignedJobs().length > 0) {
+      <ui-expansion-panel [titleKey]="'SERVERS.UNASSIGNED'" [expanded]="expandedAll()">
+        <ng-container panelHeader>
+          <div class="server-header">
+            <ui-badge labelKey="Unassigned" color="warning" />
+            <span>{{ 'SERVERS.UNASSIGNED_JOBS' | translate }} ({{ unassignedJobs().length }})</span>
+          </div>
+        </ng-container>
+        <ui-data-grid
+          [rowData]="unassignedJobs()"
+          [columnDefs]="jobColDefs"
+          [domLayout]="'autoHeight'"
+        />
+      </ui-expansion-panel>
+    }
+  </div>
+</section>

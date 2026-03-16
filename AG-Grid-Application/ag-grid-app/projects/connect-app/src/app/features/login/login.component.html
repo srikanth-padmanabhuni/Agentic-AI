@@ -1,0 +1,54 @@
+<section class="login-page" role="main" [attr.aria-label]="'LOGIN.TITLE' | translate">
+  <div class="login-container">
+    <ui-card [titleKey]="'LOGIN.TITLE'">
+      <div class="login-logo" aria-hidden="true">
+        <img src="assets/images/logo.png" alt="" class="logo-image" />
+      </div>
+
+      @if (error()) {
+        <div class="login-error" role="alert" aria-live="assertive">
+          <span>{{ error() | translate }}</span>
+        </div>
+      }
+
+      <form (ngSubmit)="onSubmit()" class="login-form" autocomplete="on">
+        <ui-text-field
+          [(ngModel)]="username"
+          name="username"
+          [label]="'LOGIN.USERNAME' | translate"
+          [ariaLabel]="'ARIA.USERNAME_INPUT' | translate"
+          [required]="true"
+          autocomplete="username"
+        />
+
+        <ui-password-field
+          [(ngModel)]="password"
+          name="password"
+          [label]="'LOGIN.PASSWORD' | translate"
+          [ariaLabel]="'ARIA.PASSWORD_INPUT' | translate"
+          [required]="true"
+          autocomplete="current-password"
+        />
+
+        <ui-text-field
+          [(ngModel)]="tenant"
+          name="tenant"
+          [label]="'LOGIN.TENANT' | translate"
+          [ariaLabel]="'ARIA.TENANT_INPUT' | translate"
+          [required]="true"
+          [readonly]="true"
+        />
+
+        <ui-button
+          variant="primary"
+          type="submit"
+          [labelKey]="'LOGIN.SIGN_IN'"
+          [disabled]="loading()"
+          [loading]="loading()"
+          [ariaLabel]="'ARIA.LOGIN_BUTTON' | translate"
+          class="login-submit"
+        />
+      </form>
+    </ui-card>
+  </div>
+</section>

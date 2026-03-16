@@ -1,0 +1,52 @@
+.ui-inline-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-spacing-xs);
+  font-family: var(--ui-font-family);
+  font-size: var(--ui-font-size-sm);
+  cursor: pointer;
+  border-radius: var(--ui-border-radius-sm);
+  padding: 2px var(--ui-spacing-xs);
+
+  &:hover:not(&--disabled) {
+    background-color: var(--ui-color-surface-variant);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ui-color-border-focus);
+    outline-offset: 2px;
+  }
+
+  &--disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+
+  &--editing {
+    cursor: default;
+
+    &:hover { background-color: transparent; }
+  }
+
+  &__value {
+    color: var(--ui-color-on-surface);
+  }
+
+  &__icon {
+    color: var(--ui-color-on-surface-variant);
+    flex-shrink: 0;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 2px var(--ui-spacing-xs);
+    border: var(--ui-border-width) solid var(--ui-color-border-focus);
+    border-radius: var(--ui-border-radius-sm);
+    font-family: var(--ui-font-family);
+    font-size: var(--ui-font-size-sm);
+    color: var(--ui-color-on-surface);
+    background-color: var(--ui-color-surface);
+    outline: none;
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,19 @@
+<article class="ui-card" [class.ui-card--elevated]="elevated()" [class.ui-card--no-padding]="!padding()">
+  @if (titleKey() || subtitleKey()) {
+    <header class="ui-card__header">
+      @if (titleKey()) {
+        <h3 class="ui-card__title">{{ titleKey() | translate }}</h3>
+      }
+      @if (subtitleKey()) {
+        <p class="ui-card__subtitle">{{ subtitleKey() | translate }}</p>
+      }
+      <div class="ui-card__header-actions">
+        <ng-content select="[cardActions]"></ng-content>
+      </div>
+    </header>
+  }
+  <div class="ui-card__content">
+    <ng-content></ng-content>
+  </div>
+  <ng-content select="[cardFooter]"></ng-content>
+</article>

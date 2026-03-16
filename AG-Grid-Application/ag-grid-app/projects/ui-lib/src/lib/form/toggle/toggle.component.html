@@ -1,0 +1,22 @@
+<label
+  class="ui-toggle"
+  [class.ui-toggle--checked]="checked()"
+  [class.ui-toggle--disabled]="isDisabled()"
+  [class.ui-toggle--sm]="size() === 'sm'"
+  [class.ui-toggle--lg]="size() === 'lg'">
+  <input
+    type="checkbox"
+    class="ui-toggle__input"
+    role="switch"
+    [checked]="checked()"
+    [disabled]="isDisabled()"
+    [attr.aria-label]="ariaLabel() ? (ariaLabel() | translate) : null"
+    [attr.aria-checked]="checked()"
+    (change)="toggle()" />
+  <span class="ui-toggle__track" aria-hidden="true">
+    <span class="ui-toggle__thumb"></span>
+  </span>
+  @if (label()) {
+    <span class="ui-toggle__label">{{ label() | translate }}</span>
+  }
+</label>

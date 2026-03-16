@@ -1,0 +1,46 @@
+.ui-language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-spacing-xs);
+
+  &__label {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    cursor: pointer;
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  }
+
+  &__select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 1px solid currentColor;
+    border-radius: var(--ui-border-radius-sm);
+    padding: 2px var(--ui-spacing-sm);
+    font-family: var(--ui-font-family);
+    font-size: var(--ui-font-size-xs);
+    color: inherit;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--ui-color-border-focus);
+      outline-offset: 2px;
+    }
+
+    option {
+      background-color: var(--ui-color-surface);
+      color: var(--ui-color-on-surface);
+    }
+  }
+}

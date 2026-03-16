@@ -1,0 +1,13 @@
+<section class="users-list" [attr.aria-label]="'USERS.TITLE' | translate">
+  <div class="list-actions">
+    <ui-button variant="primary" size="sm" [labelKey]="'USERS.ADD'" (clicked)="onCreate()" />
+    <ui-button variant="secondary" size="sm" [labelKey]="'COMMON.RELOAD'" (clicked)="loadData()" />
+  </div>
+
+  <ui-data-grid
+    [rowData]="users()"
+    [columnDefs]="colDefs"
+    [gridHeight]="'calc(100vh - 170px)'"
+    (rowClicked)="onRowClicked($event)"
+  />
+</section>

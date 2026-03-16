@@ -1,0 +1,68 @@
+<section class="server-detail" [attr.aria-label]="'SERVERS.DETAIL' | translate">
+  <ui-toolbar>
+    <ui-button variant="text" [labelKey]="'COMMON.BACK'" (clicked)="onBack()" />
+    @if (server()) {
+      <ui-button variant="primary" [labelKey]="'COMMON.EDIT'" (clicked)="onEdit()" />
+    }
+  </ui-toolbar>
+
+  @if (server(); as s) {
+    <ui-card [titleKey]="'SERVERS.DETAIL'">
+      <div class="detail-header">
+        <ui-badge [labelKey]="s.status ?? ''" [color]="getStatusVariant()" />
+        <h3>{{ s.host }}:{{ s.port }}</h3>
+      </div>
+
+      <dl class="detail-grid">
+        <div class="detail-row">
+          <dt>{{ 'SERVERS.HOST' | translate }}</dt>
+          <dd>{{ s.host }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'SERVERS.PORT' | translate }}</dt>
+          <dd>{{ s.port }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'SERVERS.MAX_JOBS' | translate }}</dt>
+          <dd>{{ s.maxNumJobs }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'SERVERS.RUNNING_JOBS' | translate }}</dt>
+          <dd>{{ s.numOfRunningJobs }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'SERVERS.UPTIME' | translate }}</dt>
+          <dd>{{ s.uptime }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'SERVERS.VERSION' | translate }}</dt>
+          <dd>{{ s.contentVersion }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'SERVERS.CPU' | translate }}</dt>
+          <dd>{{ s.processCpuUsage }}%</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'SERVERS.MEMORY' | translate }}</dt>
+          <dd>{{ s.usedMemory }}MB / {{ s.totalMemory }}MB</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'SERVERS.DISK' | translate }}</dt>
+          <dd>{{ s.freeDiskSpace }}MB</dd>
+        </div>
+      </dl>
+    </ui-card>
+
+    @if (jobs().length > 0) {
+      <ui-card [titleKey]="'SERVERS.ASSIGNED_JOBS'">
+        <ui-data-grid
+          [rowData]="jobs()"
+          [columnDefs]="jobColDefs"
+          [domLayout]="'autoHeight'"
+        />
+      </ui-card>
+    }
+  } @else {
+    <p>{{ 'COMMON.LOADING' | translate }}</p>
+  }
+</section>

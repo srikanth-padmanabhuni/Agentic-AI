@@ -1,0 +1,35 @@
+.ui-confirm-dialog {
+  background-color: var(--ui-color-surface);
+  border-radius: var(--ui-border-radius-lg);
+  padding: var(--ui-spacing-xl);
+  box-shadow: var(--ui-shadow-lg);
+  max-width: 480px;
+
+  &__title {
+    font-family: var(--ui-font-family);
+    font-size: var(--ui-font-size-lg);
+    font-weight: var(--ui-font-weight-semibold);
+    color: var(--ui-color-on-surface);
+    margin: 0 0 var(--ui-spacing-md);
+  }
+
+  &__message {
+    font-family: var(--ui-font-family);
+    font-size: var(--ui-font-size-md);
+    color: var(--ui-color-on-surface-variant);
+    margin: 0 0 var(--ui-spacing-lg);
+    line-height: 1.5;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--ui-spacing-sm);
+  }
+}
+
+::ng-deep .ui-dialog-panel {
+  .cdk-overlay-backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}

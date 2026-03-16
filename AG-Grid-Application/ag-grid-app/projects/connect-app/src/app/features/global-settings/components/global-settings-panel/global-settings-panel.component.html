@@ -1,0 +1,29 @@
+<section class="global-settings-panel" [attr.aria-label]="'GLOBAL_SETTINGS.TITLE' | translate">
+  <div class="list-actions">
+    <ui-button variant="secondary" size="sm" [labelKey]="'COMMON.CANCEL'" [disabled]="!isDirty()" (clicked)="onCancel()" />
+    <ui-button variant="primary" size="sm" [labelKey]="'COMMON.SAVE'" [disabled]="!isDirty()" (clicked)="onSave()" />
+    <ui-button variant="secondary" size="sm" [labelKey]="'COMMON.RELOAD'" (clicked)="loadData()" />
+  </div>
+
+  <ui-card [titleKey]="'GLOBAL_SETTINGS.TITLE'">
+    <form [formGroup]="settingsForm" class="settings-form" role="form" [attr.aria-label]="'GLOBAL_SETTINGS.FORM' | translate">
+      <div formArrayName="properties">
+        @for (prop of propertiesArray.controls; track prop; let i = $index) {
+          <div class="property-row" [formGroupName]="i">
+            <div class="prop-name">
+              <label>{{ prop.get('name')?.value }}</label>
+            </div>
+            <div class="prop-value">
+              <input
+                type="text"
+                class="settings-input"
+                formControlName="value"
+                [attr.aria-label]="'Value for ' + prop.get('name')?.value"
+              />
+            </div>
+          </div>
+        }
+      </div>
+    </form>
+  </ui-card>
+</section>

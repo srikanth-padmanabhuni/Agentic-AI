@@ -1,0 +1,21 @@
+@if (overlay()) {
+  <div class="ui-loading-overlay" role="alert" aria-busy="true" [attr.aria-label]="'ARIA.LOADING' | translate">
+    <div class="ui-loading-spinner" [class]="'ui-loading-spinner--' + size()">
+      <svg class="ui-loading-spinner__svg" viewBox="0 0 50 50" aria-hidden="true">
+        <circle class="ui-loading-spinner__circle" cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
+      </svg>
+      @if (messageKey()) {
+        <span class="ui-loading-spinner__message">{{ messageKey() | translate }}</span>
+      }
+    </div>
+  </div>
+} @else {
+  <div class="ui-loading-spinner" [class]="'ui-loading-spinner--' + size()" role="alert" aria-busy="true" [attr.aria-label]="'ARIA.LOADING' | translate">
+    <svg class="ui-loading-spinner__svg" viewBox="0 0 50 50" aria-hidden="true">
+      <circle class="ui-loading-spinner__circle" cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
+    </svg>
+    @if (messageKey()) {
+      <span class="ui-loading-spinner__message">{{ messageKey() | translate }}</span>
+    }
+  </div>
+}

@@ -1,0 +1,44 @@
+<section class="user-create" [attr.aria-label]="'USERS.CREATE' | translate">
+  <ui-toolbar>
+    <ui-button toolbarStart variant="primary" [labelKey]="'COMMON.CANCEL'" (clicked)="onCancel()" />
+    <ui-button toolbarEnd variant="primary" [labelKey]="'COMMON.SAVE'" (clicked)="onSave()" />
+  </ui-toolbar>
+
+  <ui-card [titleKey]="'USERS.CREATE'">
+    <form class="form-grid" (ngSubmit)="onSave()">
+      <ui-text-field
+        [(ngModel)]="name"
+        [label]="'USERS.NAME' | translate"
+        name="name"
+        [required]="true"
+        [ariaLabel]="'ARIA.USER_NAME' | translate"
+      />
+      <ui-text-field
+        [(ngModel)]="userId"
+        [label]="'USERS.USER_ID' | translate"
+        name="userId"
+        [required]="true"
+        [ariaLabel]="'ARIA.USER_ID' | translate"
+      />
+      <ui-password-field
+        [(ngModel)]="password"
+        [label]="'USERS.PASSWORD' | translate"
+        name="password"
+        [required]="true"
+        [ariaLabel]="'ARIA.USER_PASSWORD' | translate"
+      />
+      <ui-select
+        [(ngModel)]="role"
+        [options]="roleOptions"
+        [label]="'USERS.ROLE' | translate"
+        name="role"
+      />
+      <ui-select
+        [(ngModel)]="status"
+        [options]="statusOptions"
+        [label]="'USERS.STATUS' | translate"
+        name="status"
+      />
+    </form>
+  </ui-card>
+</section>

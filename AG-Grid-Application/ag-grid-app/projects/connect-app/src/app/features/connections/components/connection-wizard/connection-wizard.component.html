@@ -1,0 +1,72 @@
+<section class="connection-wizard" [attr.aria-label]="(isEditMode() ? 'CONNECTIONS.EDIT' : 'CONNECTIONS.CREATE') | translate">
+  <h2>{{ (isEditMode() ? 'CONNECTIONS.EDIT' : 'CONNECTIONS.CREATE') | translate }}</h2>
+
+  <ui-stepper [steps]="steps" [linear]="true" />
+
+  <div class="wizard-content">
+    @switch (currentStep()) {
+      @case (0) {
+        <ui-card [titleKey]="'WIZARD.STEP_DATASOURCE'">
+          <div class="form-grid">
+            <ui-text-field
+              [(ngModel)]="state().connectionName"
+              [label]="'CONNECTIONS.NAME' | translate"
+              [required]="true"
+              [ariaLabel]="'ARIA.CONNECTION_NAME' | translate"
+            />
+            <ui-text-field
+              [(ngModel)]="state().connectionDescription"
+              [label]="'CONNECTIONS.DESCRIPTION' | translate"
+              [ariaLabel]="'ARIA.CONNECTION_DESCRIPTION' | translate"
+            />
+            <ui-select
+              [options]="directionOptions"
+              [(ngModel)]="state().direction"
+              [label]="'CONNECTIONS.DIRECTION' | translate"
+            />
+          </div>
+        </ui-card>
+      }
+      @case (1) {
+        <ui-card [titleKey]="'WIZARD.STEP_TYPE_MAPPING'">
+          <p>{{ 'WIZARD.TYPE_MAPPING_INSTRUCTIONS' | translate }}</p>
+        </ui-card>
+      }
+      @case (2) {
+        <ui-card [titleKey]="'WIZARD.STEP_SYNC_RULES'">
+          <p>{{ 'WIZARD.SYNC_RULES_INSTRUCTIONS' | translate }}</p>
+        </ui-card>
+      }
+      @case (3) {
+        <ui-card [titleKey]="'WIZARD.STEP_REVIEW'">
+          <dl class="review-list">
+            <div class="review-row">
+              <dt>{{ 'CONNECTIONS.NAME' | translate }}</dt>
+              <dd>{{ state().connectionName }}</dd>
+            </div>
+            <div class="review-row">
+              <dt>{{ 'CONNECTIONS.DIRECTION' | translate }}</dt>
+              <dd>{{ state().direction }}</dd>
+            </div>
+            <div class="review-row">
+              <dt>{{ 'CONNECTIONS.ENABLED' | translate }}</dt>
+              <dd>{{ state().enabled ? ('COMMON.YES' | translate) : ('COMMON.NO' | translate) }}</dd>
+            </div>
+          </dl>
+        </ui-card>
+      }
+    }
+  </div>
+
+  <div class="wizard-actions">
+    <ui-button variant="text" [labelKey]="'COMMON.CANCEL'" (clicked)="onCancel()" />
+    @if (currentStep() > 0) {
+      <ui-button variant="secondary" [labelKey]="'COMMON.PREVIOUS'" (clicked)="onPrevious()" />
+    }
+    @if (currentStep() < 3) {
+      <ui-button variant="primary" [labelKey]="'COMMON.NEXT'" (clicked)="onNext()" />
+    } @else {
+      <ui-button variant="primary" [labelKey]="'COMMON.SAVE'" (clicked)="onSave()" />
+    }
+  </div>
+</section>

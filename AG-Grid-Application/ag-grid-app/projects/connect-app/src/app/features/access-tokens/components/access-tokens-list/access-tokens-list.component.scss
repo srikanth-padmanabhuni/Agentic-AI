@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.access-tokens-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ui-spacing-sm);
+  padding: var(--ui-spacing-xs) 0;
+}

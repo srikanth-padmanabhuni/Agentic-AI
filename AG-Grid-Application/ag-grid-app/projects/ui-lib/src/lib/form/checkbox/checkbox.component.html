@@ -1,0 +1,13 @@
+<label class="ui-checkbox" [class.ui-checkbox--disabled]="isDisabled()">
+  <input
+    type="checkbox"
+    class="ui-checkbox__input"
+    [checked]="checked()"
+    [disabled]="isDisabled()"
+    [attr.aria-label]="ariaLabel() ? (ariaLabel() | translate) : null"
+    (change)="toggle()" />
+  <span class="ui-checkbox__checkmark" aria-hidden="true"></span>
+  @if (label()) {
+    <span class="ui-checkbox__label">{{ label() | translate }}</span>
+  }
+</label>

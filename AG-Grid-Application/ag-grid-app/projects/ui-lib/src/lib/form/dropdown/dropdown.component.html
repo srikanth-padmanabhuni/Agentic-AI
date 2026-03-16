@@ -1,0 +1,105 @@
+<div class="ui-dropdown" [class.ui-dropdown--open]="isOpen()" [class.ui-dropdown--disabled]="isDisabled()">
+  @if (label()) {
+    <label class="ui-dropdown__label" (click)="toggleDropdown()">
+      {{ label() | translate }}
+      @if (required()) {
+        <span class="ui-dropdown__required" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+
+  <div class="ui-dropdown__trigger"
+    role="combobox"
+    tabindex="0"
+    [attr.aria-label]="ariaLabel() ? (ariaLabel() | translate) : null"
+    [attr.aria-expanded]="isOpen()"
+    [attr.aria-required]="required() || null"
+    [attr.aria-disabled]="isDisabled() || null"
+    aria-haspopup="listbox"
+    (click)="toggleDropdown()"
+    (keydown.space)="$event.preventDefault(); toggleDropdown()"
+    (keydown.enter)="$event.preventDefault(); toggleDropdown()">
+
+    @if (multiple() && selectedValues().length) {
+      <div class="ui-dropdown__chips">
+        @for (val of selectedValues(); track val) {
+          <span class="ui-dropdown__chip">
+            {{ getOptionLabel(val) }}
+            <button type="button" class="ui-dropdown__chip-remove"
+              [attr.aria-label]="'Remove ' + getOptionLabel(val)"
+              (click)="removeValue(val, $event)">×</button>
+          </span>
+        }
+      </div>
+    } @else {
+      <span class="ui-dropdown__value" [class.ui-dropdown__value--placeholder]="!displayValue()">
+        {{ displayValue() || (placeholder() | translate) || '&nbsp;' }}
+      </span>
+    }
+
+    <span class="ui-dropdown__arrow" aria-hidden="true">▾</span>
+  </div>
+
+  @if (isOpen()) {
+    <div class="ui-dropdown__panel" role="presentation">
+      @if (searchable()) {
+        <div class="ui-dropdown__search">
+          <input
+            type="text"
+            class="ui-dropdown__search-input"
+            [placeholder]="searchPlaceholder() | translate"
+            [value]="searchQuery()"
+            (input)="onSearchInput($event)"
+            (click)="$event.stopPropagation()"
+            autocomplete="off" />
+        </div>
+      }
+
+      <ul #listbox class="ui-dropdown__listbox" role="listbox"
+        [attr.aria-multiselectable]="multiple() || null"
+        (scroll)="onListboxScroll($event)">
+
+        @for (opt of filteredOptions(); track opt.value; let i = $index) {
+          <li class="ui-dropdown__option"
+            role="option"
+            [class.ui-dropdown__option--selected]="isSelected(opt.value)"
+            [class.ui-dropdown__option--highlighted]="highlightedIndex() === i"
+            [class.ui-dropdown__option--disabled]="opt.disabled"
+            [attr.aria-selected]="isSelected(opt.value)"
+            [attr.aria-disabled]="opt.disabled || null"
+            (click)="selectOption(opt); $event.stopPropagation()">
+
+            @if (multiple()) {
+              <span class="ui-dropdown__checkbox" [class.ui-dropdown__checkbox--checked]="isSelected(opt.value)">
+                @if (isSelected(opt.value)) { ✓ }
+              </span>
+            }
+            {{ opt.label }}
+          </li>
+        } @empty {
+          @if (!loading()) {
+            <li class="ui-dropdown__no-results" role="presentation">
+              {{ noResultsText() | translate }}
+            </li>
+          }
+        }
+
+        @if (loading()) {
+          <li class="ui-dropdown__loading" role="presentation">
+            <span class="ui-dropdown__spinner"></span>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+  @if (touched() && errors()) {
+    <div class="ui-dropdown__errors" role="alert">
+      @for (entry of errors() | keyvalue; track entry.key) {
+        @if (errorMessages()[entry.key]) {
+          <span class="ui-dropdown__error">{{ errorMessages()[entry.key] | translate }}</span>
+        }
+      }
+    </div>
+  }
+</div>

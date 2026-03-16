@@ -1,0 +1,12 @@
+<header class="ui-toolbar" [class.ui-toolbar--elevated]="elevated()" role="toolbar">
+  @if (titleKey()) {
+    <h1 class="ui-toolbar__title">{{ titleKey() | translate }}</h1>
+  }
+  <div class="ui-toolbar__start">
+    <ng-content select="[toolbarStart]"></ng-content>
+  </div>
+  <div class="ui-toolbar__spacer"></div>
+  <div class="ui-toolbar__end">
+    <ng-content select="[toolbarEnd]"></ng-content>
+  </div>
+</header>

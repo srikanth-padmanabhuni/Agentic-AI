@@ -1,0 +1,78 @@
+:host {
+  display: block;
+}
+
+.server-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ui-spacing-sm);
+  padding: var(--ui-spacing-xs) 0;
+}
+
+.server-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-spacing-sm);
+}
+
+.server-header {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-spacing-sm);
+  flex-wrap: wrap;
+}
+
+.server-host {
+  font-weight: 600;
+}
+
+.server-summary {
+  color: var(--ui-color-text-secondary);
+  font-size: var(--ui-font-size-sm);
+}
+
+.server-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-spacing-md);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--ui-spacing-sm);
+  margin: 0;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-spacing-xs);
+}
+
+.metric dt {
+  font-size: var(--ui-font-size-sm);
+  color: var(--ui-color-text-secondary);
+  font-weight: 500;
+}
+
+.metric dd {
+  margin: 0;
+}
+
+.server-actions {
+  display: flex;
+  gap: var(--ui-spacing-sm);
+}
+
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

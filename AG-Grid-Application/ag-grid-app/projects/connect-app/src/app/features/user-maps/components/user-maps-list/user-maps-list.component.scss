@@ -1,0 +1,42 @@
+:host {
+  display: block;
+}
+
+.user-maps-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ui-spacing-sm);
+  padding: var(--ui-spacing-xs) 0;
+}
+
+.tree-area {
+  padding: var(--ui-spacing-sm);
+}
+
+.tree-group {
+  margin-bottom: var(--ui-spacing-xs);
+}
+
+.tree-group-header {
+  cursor: pointer;
+  padding: var(--ui-spacing-xs) var(--ui-spacing-sm);
+  border-radius: var(--ui-border-radius-sm);
+}
+
+.tree-group-header:hover {
+  background: var(--ui-color-surface-hover);
+}
+
+.tree-children {
+  padding-left: var(--ui-spacing-lg);
+}
+
+.tree-leaf {
+  padding: var(--ui-spacing-xs) var(--ui-spacing-sm);
+}

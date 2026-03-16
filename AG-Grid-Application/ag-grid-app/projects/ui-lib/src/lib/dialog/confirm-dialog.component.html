@@ -1,0 +1,16 @@
+<div class="ui-confirm-dialog" role="alertdialog" [attr.aria-labelledby]="'dlg-title'" [attr.aria-describedby]="'dlg-msg'">
+  <h2 id="dlg-title" class="ui-confirm-dialog__title">{{ data.titleKey | translate }}</h2>
+  <p id="dlg-msg" class="ui-confirm-dialog__message">{{ data.messageKey | translate }}</p>
+  <div class="ui-confirm-dialog__actions">
+    <ui-button
+      [labelKey]="data.cancelKey ?? 'COMMON.CANCEL'"
+      variant="secondary"
+      (clicked)="cancel()">
+    </ui-button>
+    <ui-button
+      [labelKey]="data.confirmKey ?? 'COMMON.CONFIRM'"
+      [variant]="data.variant ?? 'primary'"
+      (clicked)="confirm()">
+    </ui-button>
+  </div>
+</div>

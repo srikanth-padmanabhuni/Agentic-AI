@@ -1,0 +1,23 @@
+// ============================================================
+// AG-Grid Theme Overrides — Map design tokens to AG-Grid CSS vars
+// ============================================================
+
+.ui-data-grid {
+  --ag-background-color: var(--ui-color-surface);
+  --ag-foreground-color: var(--ui-color-on-surface);
+  --ag-header-background-color: var(--ui-color-surface-variant);
+  --ag-header-foreground-color: var(--ui-color-on-surface);
+  --ag-row-hover-color: var(--ui-color-surface-hover);
+  --ag-selected-row-background-color: var(--ui-color-primary-light);
+  --ag-range-selection-background-color: var(--ui-color-primary-light);
+  --ag-border-color: var(--ui-color-border);
+  --ag-font-family: var(--ui-font-family);
+  --ag-font-size: var(--ui-font-size-sm);
+  --ag-cell-horizontal-padding: var(--ui-spacing-md);
+  --ag-row-border-color: var(--ui-color-divider);
+  --ag-odd-row-background-color: transparent;
+  --ag-control-panel-background-color: var(--ui-color-surface);
+  --ag-input-focus-border-color: var(--ui-color-primary);
+  --ag-checkbox-checked-color: var(--ui-color-primary);
+  --ag-toggle-button-on-background-color: var(--ui-color-primary);
+}

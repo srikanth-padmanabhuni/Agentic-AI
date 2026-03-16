@@ -1,0 +1,66 @@
+{
+  "name": "ag-grid-app",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve connect-app --proxy-config projects/connect-app/proxy.conf.json --port 4200",
+    "build": "ng build ui-lib && ng build connect-app",
+    "build:lib": "ng build ui-lib",
+    "build:app": "ng build connect-app",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "eslint projects --ext .ts",
+    "audit": "npm audit --audit-level=moderate",
+    "storybook": "ng run ui-lib:storybook",
+    "build-storybook": "ng run ui-lib:build-storybook"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "packageManager": "npm@11.4.2",
+  "dependencies": {
+    "@angular/animations": "^21.1.0",
+    "@angular/cdk": "^21.1.0",
+    "@angular/common": "^21.1.0",
+    "@angular/compiler": "^21.1.0",
+    "@angular/core": "^21.1.0",
+    "@angular/forms": "^21.1.0",
+    "@angular/platform-browser": "^21.1.0",
+    "@angular/router": "^21.1.0",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
+    "ag-grid-angular": "^33.3.2",
+    "ag-grid-community": "^33.3.2",
+    "ag-grid-enterprise": "^33.3.2",
+    "chart.js": "^4.5.1",
+    "chartjs-plugin-zoom": "^2.2.0",
+    "ng2-charts": "^8.0.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^21.2.1",
+    "@angular/build": "^21.1.5",
+    "@angular/cli": "^21.1.5",
+    "@angular/compiler-cli": "^21.1.0",
+    "@angular/platform-browser-dynamic": "^21.2.2",
+    "@storybook/angular": "^10.2.17",
+    "jsdom": "^27.1.0",
+    "ng-packagr": "^21.1.0",
+    "prettier": "^3.8.1",
+    "storybook": "^10.2.17",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8",
+    "zone.js": "^0.15.1"
+  }
+}

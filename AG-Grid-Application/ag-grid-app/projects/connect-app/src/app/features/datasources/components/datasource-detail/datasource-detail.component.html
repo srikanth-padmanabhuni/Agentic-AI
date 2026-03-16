@@ -1,0 +1,37 @@
+<section class="datasource-detail" [attr.aria-label]="'DATASOURCES.DETAIL' | translate">
+  <ui-toolbar>
+    <ui-button variant="text" [labelKey]="'COMMON.BACK'" (clicked)="onBack()" />
+    @if (dataSource()) {
+      <ui-button variant="secondary" [labelKey]="'COMMON.DELETE'" (clicked)="onDelete()" />
+    }
+  </ui-toolbar>
+
+  @if (dataSource(); as ds) {
+    <ui-card [titleKey]="'DATASOURCES.DETAIL'">
+      <dl class="detail-grid">
+        <div class="detail-row">
+          <dt>{{ 'DATASOURCES.NAME' | translate }}</dt>
+          <dd>{{ ds.name }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'DATASOURCES.PRODUCT' | translate }}</dt>
+          <dd>{{ ds.product }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'DATASOURCES.DISPLAY_NAME' | translate }}</dt>
+          <dd>{{ ds.productDisplayName }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'DATASOURCES.CONTEXT_TYPE' | translate }}</dt>
+          <dd>{{ ds.contextType }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>{{ 'DATASOURCES.MODIFIER_ROLE' | translate }}</dt>
+          <dd>{{ ds.modifierRole }}</dd>
+        </div>
+      </dl>
+    </ui-card>
+  } @else {
+    <p>{{ 'COMMON.LOADING' | translate }}</p>
+  }
+</section>

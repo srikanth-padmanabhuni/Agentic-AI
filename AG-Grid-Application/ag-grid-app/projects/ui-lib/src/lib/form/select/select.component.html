@@ -1,0 +1,26 @@
+<div class="ui-select" [class.ui-select--disabled]="isDisabled()">
+  @if (label()) {
+    <label class="ui-select__label" [attr.for]="'select-' + label()">
+      {{ label() | translate }}
+      @if (required()) {
+        <span class="ui-select__required" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+  <select
+    class="ui-select__input"
+    [id]="'select-' + label()"
+    [value]="value()"
+    [attr.aria-label]="ariaLabel() ? (ariaLabel() | translate) : null"
+    [attr.aria-required]="required() || null"
+    [disabled]="isDisabled()"
+    (change)="onSelectionChange($event)"
+    (blur)="onBlur()">
+    @if (placeholder()) {
+      <option value="" disabled>{{ placeholder() | translate }}</option>
+    }
+    @for (opt of options(); track opt.value) {
+      <option [value]="opt.value">{{ opt.labelKey | translate }}</option>
+    }
+  </select>
+</div>

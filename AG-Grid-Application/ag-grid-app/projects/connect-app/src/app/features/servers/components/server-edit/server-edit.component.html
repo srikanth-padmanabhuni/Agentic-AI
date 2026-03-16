@@ -1,0 +1,37 @@
+<section class="server-edit" [attr.aria-label]="'SERVERS.EDIT' | translate">
+  <ui-toolbar>
+    <ui-button variant="text" [labelKey]="'COMMON.CANCEL'" (clicked)="onCancel()" />
+    <ui-button variant="primary" [labelKey]="'COMMON.SAVE'" (clicked)="onSave()" />
+  </ui-toolbar>
+
+  @if (server(); as s) {
+    <ui-card [titleKey]="'SERVERS.EDIT'">
+      <form class="form-grid" (ngSubmit)="onSave()">
+        <ui-text-field
+          [label]="'SERVERS.HOST' | translate"
+          [ngModel]="s.host ?? ''"
+          [readonly]="true"
+          name="host"
+          [ariaLabel]="'ARIA.SERVER_HOST' | translate"
+        />
+        <ui-text-field
+          [label]="'SERVERS.PORT' | translate"
+          [ngModel]="(s.port ?? '') + ''"
+          [readonly]="true"
+          name="port"
+          [ariaLabel]="'ARIA.SERVER_PORT' | translate"
+        />
+        <ui-text-field
+          [label]="'SERVERS.MAX_JOBS' | translate"
+          [(ngModel)]="maxNumJobs"
+          name="maxNumJobs"
+          type="number"
+          [required]="true"
+          [ariaLabel]="'ARIA.SERVER_MAX_JOBS' | translate"
+        />
+      </form>
+    </ui-card>
+  } @else {
+    <p>{{ 'COMMON.LOADING' | translate }}</p>
+  }
+</section>

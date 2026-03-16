@@ -1,0 +1,21 @@
+<div class="ui-textarea" [class.ui-textarea--disabled]="isDisabled()">
+  @if (label()) {
+    <label class="ui-textarea__label" [attr.for]="'ta-' + label()">
+      {{ label() | translate }}
+      @if (required()) {
+        <span class="ui-textarea__required" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+  <textarea
+    class="ui-textarea__input"
+    [id]="'ta-' + label()"
+    [value]="value()"
+    [rows]="rows()"
+    [placeholder]="placeholder() ? (placeholder() | translate) : ''"
+    [attr.aria-label]="ariaLabel() ? (ariaLabel() | translate) : null"
+    [attr.aria-required]="required() || null"
+    [disabled]="isDisabled()"
+    (input)="onInput($event)"
+    (blur)="onBlur()"></textarea>
+</div>

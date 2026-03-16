@@ -1,0 +1,22 @@
+<div class="ui-expansion-panel" [class.ui-expansion-panel--expanded]="expanded()">
+  <button
+    class="ui-expansion-panel__header"
+    type="button"
+    [attr.aria-expanded]="expanded()"
+    (click)="toggle()">
+    <div class="ui-expansion-panel__titles">
+      <span class="ui-expansion-panel__title">{{ titleKey() | translate }}</span>
+      @if (subtitleKey()) {
+        <span class="ui-expansion-panel__subtitle">{{ subtitleKey() | translate }}</span>
+      }
+    </div>
+    <svg class="ui-expansion-panel__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  @if (expanded()) {
+    <div class="ui-expansion-panel__body" role="region">
+      <ng-content></ng-content>
+    </div>
+  }
+</div>
