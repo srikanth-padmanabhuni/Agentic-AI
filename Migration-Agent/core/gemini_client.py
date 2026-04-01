@@ -2,10 +2,17 @@
 Gemini AI client module for standardized API interactions
 """
 import json
+import re
 from google import genai
 from google.genai import types
 from config import GEMINI_API_KEY, GEMINI_MODEL, GEMINI_TEMPERATURE
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
+
+
+class GeminiRateLimitError(Exception):
+    """Raised when Gemini API rate limit is exceeded."""
+    pass
+
 
 class GeminiClient:
     """Wrapper for Gemini API calls with consistent JSON responses."""
@@ -13,14 +20,25 @@ class GeminiClient:
     def __init__(self):
         self.client = genai.Client(api_key=GEMINI_API_KEY)
     
+    @staticmethod
+    def _clean_json_response(text: str) -> str:
+        """Strip markdown fences and trailing commas from Gemini response."""
+        # Remove ```json ... ``` wrapper if present
+        text = re.sub(r'^```(?:json)?\s*\n?', '', text.strip())
+        text = re.sub(r'\n?```\s*$', '', text.strip())
+        # Remove trailing commas before } or ]
+        text = re.sub(r',\s*([}\]])', r'\1', text)
+        return text.strip()
+
     # Retry strategy: 
     # Wait starts at 10s (to clear the 1-minute window), 
     # doubles each time, stops after 5 attempts.
+    # Only retries on rate-limit errors, NOT on JSON parse errors.
     @retry(
-        retry=retry_if_exception_type(Exception), 
+        retry=retry_if_exception_type(GeminiRateLimitError), 
         wait=wait_exponential(multiplier=2, min=10, max=60),
         stop=stop_after_attempt(5),
-        before_sleep=lambda retry_state: print(f"Quota hit. Retrying in {retry_state.next_action.sleep}s...")
+        before_sleep=lambda retry_state: print(f"⏳ Quota hit. Retrying in {retry_state.next_action.sleep}s...")
     )
     def generate_json_response(self, system_instruction: str, user_content: str) -> dict:
         """
@@ -43,11 +61,23 @@ class GeminiClient:
                     response_mime_type="application/json"
                 )
             )
-            return json.loads(response.text)
         except Exception as e:
+            error_str = str(e)
+            if "429" in error_str or "RESOURCE_EXHAUSTED" in error_str:
+                print("⚠️ Rate limit exceeded.")
+                raise GeminiRateLimitError(f"Gemini API rate limit exceeded: {e}")
             print(f"❌ Gemini API Error: {e}")
-            if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
-                print("⚠️ Rate limit exceeded. Consider implementing retry logic with exponential backoff.")
-                raise Exception("Gemini API rate limit exceeded. Please try again later.")
-            else:
-                raise Exception(f"Gemini API error: {e}")
+            raise
+
+        # Parse JSON, with cleanup fallback
+        raw_text = response.text
+        try:
+            return json.loads(raw_text)
+        except json.JSONDecodeError:
+            cleaned = self._clean_json_response(raw_text)
+            try:
+                return json.loads(cleaned)
+            except json.JSONDecodeError as e:
+                print(f"❌ Failed to parse Gemini JSON response: {e}")
+                print(f"   Raw response (first 500 chars): {raw_text[:500]}")
+                raise
